@@ -139,6 +139,8 @@ New_vaccinations numeric,
 RollingPeopleVaccinated numeric
 )
 
+-------------------------------------------------------------------------------------
+
 Insert into #PercentPopulationVaccinated
 Select dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations
 , SUM(CONVERT(int,vac.new_vaccinations)) OVER (Partition by dea.Location Order by dea.location, dea.Date) as RollingPeopleVaccinated
@@ -154,7 +156,7 @@ Select *, (RollingPeopleVaccinated/Population)*100
 From #PercentPopulationVaccinated
 
 
-
+-------------------------------------------------------------------------------------
 
 -- Creating View to store data for later visualizations
 
